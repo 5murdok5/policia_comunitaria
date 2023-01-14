@@ -33,7 +33,7 @@ class CompActionsHome extends StatelessWidget {
             bottom: 10,
           ),
           text(
-            'Todas las alertas son monitoreadas, recuerda, no uses el sistema en vano, tu seguridad es nuestra responsabilidad',
+            'Todas las alertas son monitoreadas, No uses el sistema si no es necesario, tu seguridad es nuestra responsabilidad',
             left: paddingHzApp,
             right: paddingHzApp,
           ),
