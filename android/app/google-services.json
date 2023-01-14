@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1032580602447",
+    "project_id": "policiacomunicaria",
+    "storage_bucket": "policiacomunicaria.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032580602447:android:5e69b5e36ba32f0a64283a",
+        "android_client_info": {
+          "package_name": "com.example.policiacomunitaria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032580602447-t5ac0p52dru622aaiui80pmlb0uskj7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUWos48N1AVyRUAfyR5BgH7MQkrb73iek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032580602447-t5ac0p52dru622aaiui80pmlb0uskj7k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
