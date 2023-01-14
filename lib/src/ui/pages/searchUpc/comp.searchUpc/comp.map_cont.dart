@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:policiacomunitaria/src/logic/controllers/MapCtrl.dart';
-
-final myLocation = LatLng(-4.012363, -79.197939);
+import 'package:policiacomunitaria/src/logic/controllers/mapCtrl.dart';
 
 class MapComp extends StatelessWidget {
   MapComp({super.key});
+
   final MapDtController mapCtrl = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
+      // mapController: mapCtrl.ctrlMap!,
+      mapController: mapCtrl.ctrlMap,
       options: MapOptions(
-        minZoom: 5,
+        minZoom: 1,
         maxZoom: 20,
         zoom: 17,
         center: myLocation,

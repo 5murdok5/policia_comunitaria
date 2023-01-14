@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
-import 'package:policiacomunitaria/src/logic/controllers/MapCtrl.dart';
+import 'package:policiacomunitaria/src/logic/controllers/mapCtrl.dart';
 import 'package:policiacomunitaria/src/theme/theme.dart';
 import 'package:policiacomunitaria/src/ui/pages/searchUpc/comp.searchUpc/comp.map_cont.dart';
 import 'package:policiacomunitaria/src/ui/pages/searchUpc/comp.searchUpc/comp.upcInfo.dart';
@@ -14,7 +14,6 @@ class PageSearchUpc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: buttonLocation(),
       body: GetBuilder<MapDtController>(
         init: MapDtController(),
         initState: (_) {},
@@ -37,6 +36,7 @@ class PageSearchUpc extends StatelessWidget {
   Widget headerMap() {
     return SafeArea(
       child: CtCard(
+        color: kprimaryColor,
         showShadow: true,
         margin: EdgeInsets.symmetric(horizontal: paddingHzApp, vertical: 10),
         child: Column(
@@ -50,6 +50,7 @@ class PageSearchUpc extends StatelessWidget {
                   onPressed: () => Get.back(),
                   icon: const Icon(
                     Icons.chevron_left,
+                    color: Colors.white,
                   ),
                 ),
                 Column(
@@ -60,32 +61,39 @@ class PageSearchUpc extends StatelessWidget {
                     text(
                       'Buscar UPCs por la zona',
                       type: 'subtitle',
+                      color: Colors.white,
                     ),
                     text(
                       'Encuentra Upcs cerca de donde estes.',
                       type: 'body1',
+                      color: Colors.white,
                     ),
                   ],
                 ),
               ],
             ),
             const Divider(
-              color: Colors.black,
+              color: Colors.white,
+              height: 11,
             ),
-            Row(
-              children: [
-                const Icon(
-                  Icons.location_history_sharp,
-                  color: kprimaryColor,
-                ),
-                Expanded(
-                  child: text(
-                    'Pradera, Arupos y Nogales',
-                    type: 'body1',
-                    left: 10,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.location_history_sharp,
+                    color: Colors.white,
                   ),
-                )
-              ],
+                  Expanded(
+                    child: text(
+                      'Pradera, Arupos y Nogales',
+                      type: 'body1',
+                      left: 10,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              ),
             )
           ],
         ),
@@ -94,6 +102,7 @@ class PageSearchUpc extends StatelessWidget {
   }
 
   Widget infoCard() {
+    MapDtController mpctrl = Get.find();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -106,7 +115,7 @@ class PageSearchUpc extends StatelessWidget {
           ),
           FloatingActionButton(
             backgroundColor: kprimaryColor,
-            onPressed: () {},
+            onPressed: () => mpctrl.goMyLocation(),
             child: const Icon(
               Icons.my_location_rounded,
               color: Colors.white,

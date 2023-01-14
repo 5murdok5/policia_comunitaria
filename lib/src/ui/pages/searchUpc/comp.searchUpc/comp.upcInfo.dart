@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
-import 'package:policiacomunitaria/src/logic/controllers/MapCtrl.dart';
+import 'package:policiacomunitaria/src/logic/controllers/mapCtrl.dart';
 import 'package:policiacomunitaria/src/models/models.upcs.dart';
 import 'package:policiacomunitaria/src/theme/theme.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_card.dart';
