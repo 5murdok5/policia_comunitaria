@@ -33,3 +33,5 @@ String toTitleCase(text) => text
     .split(' ')
     .map((str) => toCapitalized(str))
     .join(' ');
+
+// const myLocation = LatLng(-12.0562176, -77.0296812);

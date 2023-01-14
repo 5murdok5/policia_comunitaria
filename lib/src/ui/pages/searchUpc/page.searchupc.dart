@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
+import 'package:policiacomunitaria/src/logic/controllers/MapCtrl.dart';
 import 'package:policiacomunitaria/src/theme/theme.dart';
+import 'package:policiacomunitaria/src/ui/pages/searchUpc/comp.searchUpc/comp.map_cont.dart';
+import 'package:policiacomunitaria/src/ui/pages/searchUpc/comp.searchUpc/comp.upcInfo.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_card.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_text.dart';
 
@@ -11,25 +14,30 @@ class PageSearchUpc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: buttonLocation(),
-      body: Stack(
-        children: [
-          mapContainer(),
-          headerMap(),
-        ],
+      // floatingActionButton: buttonLocation(),
+      body: GetBuilder<MapDtController>(
+        init: MapDtController(),
+        initState: (_) {},
+        builder: (_) {
+          return Stack(
+            children: [
+              MapComp(),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: infoCard(),
+              ),
+              headerMap(),
+            ],
+          );
+        },
       ),
-    );
-  }
-
-  Widget mapContainer() {
-    return Container(
-      color: Colors.blueAccent,
     );
   }
 
   Widget headerMap() {
     return SafeArea(
       child: CtCard(
+        showShadow: true,
         margin: EdgeInsets.symmetric(horizontal: paddingHzApp, vertical: 10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -85,13 +93,26 @@ class PageSearchUpc extends StatelessWidget {
     );
   }
 
-  FloatingActionButton buttonLocation() {
-    return FloatingActionButton(
-      backgroundColor: kprimaryColor,
-      onPressed: () {},
-      child: const Icon(
-        Icons.my_location_rounded,
-        color: Colors.white,
+  Widget infoCard() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Expanded(child: CompUpcsInfo()),
+          const SizedBox(
+            width: 10,
+          ),
+          FloatingActionButton(
+            backgroundColor: kprimaryColor,
+            onPressed: () {},
+            child: const Icon(
+              Icons.my_location_rounded,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
     );
   }
