@@ -8,7 +8,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 BuildContext? ctx = navigatorKey.currentContext;
 
 back() => Navigator.pop(ctx!);
-dismisKeybr(ctx) => FocusScope.of(ctx).unfocus();
+dismisKeybr(ctx) => FocusScope.of(ctx).requestFocus(FocusNode());
 
 //Global Theme
 ThemeData theme = Theme.of(ctx!);

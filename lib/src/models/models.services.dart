@@ -2,6 +2,8 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
+import 'package:policiacomunitaria/src/ui/pages/denuncias/page.denuncias.dart';
+import 'package:policiacomunitaria/src/ui/pages/emergencia/page.emergencia.dart';
 import 'package:policiacomunitaria/src/ui/pages/searchUpc/page.searchupc.dart';
 
 class ModelServices {
@@ -30,7 +32,7 @@ final List<ModelServices> listServicesMd = [
     iconService: 'https://i.imgur.com/KIfaqYD.png',
     largeDescription:
         'Proident labore pariatur veniam labore aliquip sit excepteur tempor in duis nulla id officia voluptate. Nulla sit dolor cillum cupidatat pariatur non Lorem nostrud. Laborum quis occaecat ut adipisicing. Consequat ad pariatur cillum cillum ut ad aliquip dolore. Do esse aliquip minim veniam culpa fugiat sunt id aute tempor tempor non in. Eu quis exercitation fugiat amet ipsum adipisicing aliquip laboris proident tempor cupidatat do. Aliquip proident qui tempor minim. Deserunt minim ipsum aliquip aliqua anim eiusmod ut nulla exercitation.',
-    page: PageSearchUpc(),
+    page: const PageSearchUpc(),
   ),
   ModelServices(
     title: 'Emergencia',
@@ -40,6 +42,7 @@ final List<ModelServices> listServicesMd = [
     iconService: 'https://i.imgur.com/FK2owpe.png',
     largeDescription:
         'Proident labore pariatur veniam labore aliquip sit excepteur tempor in duis nulla id officia voluptate. Nulla sit dolor cillum cupidatat pariatur non Lorem nostrud. Laborum quis occaecat ut adipisicing. Consequat ad pariatur cillum cillum ut ad aliquip dolore. Do esse aliquip minim veniam culpa fugiat sunt id aute tempor tempor non in. Eu quis exercitation fugiat amet ipsum adipisicing aliquip laboris proident tempor cupidatat do. Aliquip proident qui tempor minim. Deserunt minim ipsum aliquip aliqua anim eiusmod ut nulla exercitation.',
+    page: const Emergencia(),
   ),
   ModelServices(
     title: 'Denuncias',
@@ -49,6 +52,7 @@ final List<ModelServices> listServicesMd = [
     iconService: 'https://i.imgur.com/jxaG2cx.png',
     largeDescription:
         'Proident labore pariatur veniam labore aliquip sit excepteur tempor in duis nulla id officia voluptate. Nulla sit dolor cillum cupidatat pariatur non Lorem nostrud. Laborum quis occaecat ut adipisicing. Consequat ad pariatur cillum cillum ut ad aliquip dolore. Do esse aliquip minim veniam culpa fugiat sunt id aute tempor tempor non in. Eu quis exercitation fugiat amet ipsum adipisicing aliquip laboris proident tempor cupidatat do. Aliquip proident qui tempor minim. Deserunt minim ipsum aliquip aliqua anim eiusmod ut nulla exercitation.',
+    page: const PageDenuncias(),
   ),
   ModelServices(
     title: 'Custodia',
