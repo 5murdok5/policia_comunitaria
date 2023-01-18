@@ -1,23 +1,34 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:policiacomunitaria/src/logic/controllers/UserCtrl.dart';
+import 'package:policiacomunitaria/src/logic/controllers/chatCtrl.dart';
+import 'package:policiacomunitaria/src/models/models.message.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_card.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_text.dart';
 
 class CompChatList extends StatelessWidget {
-  const CompChatList({super.key});
-
+  CompChatList({super.key});
+  final ChatController smsCtrl = Get.find();
+  final UserController userCtrl = Get.find();
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      itemCount: 10,
-      reverse: true,
-      itemBuilder: (context, index) {
-        return messageComp(isRemited: true);
-      },
+    return Obx(
+      () => ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemCount: smsCtrl.listMessages.length,
+        itemBuilder: (context, index) {
+          return messageComp(
+            isRemited:
+                userCtrl.userDt.idUser == smsCtrl.listMessages[index].idUser,
+            message: smsCtrl.listMessages[index],
+          );
+        },
+      ),
     );
   }
 
-  Widget messageComp({bool isRemited = true}) {
+  Widget messageComp({bool isRemited = true, MessageModel? message}) {
     return CtCard(
       color:
           isRemited ? Colors.white : const Color.fromARGB(255, 240, 255, 248),
@@ -32,16 +43,19 @@ class CompChatList extends StatelessWidget {
             isRemited ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           text(
-            'Magna aliqua ea ullamco dolore minim pariatur ea nostrud aute proident laborum excepteur dolore voluptate.',
+            message?.message ?? 'No Sms',
             size: 13,
             textAlign: isRemited ? TextAlign.right : TextAlign.left,
             bottom: 5,
           ),
-          text(
-            '10:35 pm',
-            type: 'body1',
-            size: 10,
-            color: Colors.grey,
+          Align(
+            alignment: isRemited ? Alignment.centerLeft : Alignment.centerRight,
+            child: text(
+              '10:35 pm',
+              type: 'body1',
+              size: 10,
+              color: Colors.grey,
+            ),
           )
         ],
       ),

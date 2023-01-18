@@ -32,6 +32,8 @@ dependencies:
   latlong2: ^0.8.1
   # img_dep
   flutter_svg: ^1.1.5
+  # Animated
+  animate_do: ^3.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

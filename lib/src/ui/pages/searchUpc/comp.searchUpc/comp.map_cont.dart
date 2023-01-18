@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:policiacomunitaria/src/logic/controllers/mapCtrl.dart';
+import 'package:policiacomunitaria/src/logic/controllers/MapCtrl.dart';
 
 class MapComp extends StatelessWidget {
   MapComp({super.key});
