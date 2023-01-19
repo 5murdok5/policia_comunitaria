@@ -30,11 +30,11 @@ class ChatController extends GetxController {
         .toList();
     if (exist.isEmpty) {
       Future.delayed(
-        const Duration(milliseconds: 300),
+        const Duration(milliseconds: 1200),
         () => listMessages.add(
           MessageModel(
-            dateRecived: DateTime.now().microsecondsSinceEpoch,
-            dateSend: DateTime.now().microsecondsSinceEpoch,
+            dateRecived: DateTime.now().millisecondsSinceEpoch,
+            dateSend: DateTime.now().millisecondsSinceEpoch,
             idUser: 'owner',
             message: 'Hola, en que podemos ayudarte?',
             type: 'text',
@@ -46,8 +46,7 @@ class ChatController extends GetxController {
 
   sendMessage() {
     UserController userCtrl = Get.find();
-    listMessages.insert(
-      listMessages.length - 1,
+    listMessages.add(
       MessageModel(
         dateRecived: DateTime.now().millisecondsSinceEpoch,
         dateSend: DateTime.now().millisecondsSinceEpoch,
