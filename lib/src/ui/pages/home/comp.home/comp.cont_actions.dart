@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
 import 'package:policiacomunitaria/src/logic/controllers/ServicesCtrl.dart';
 import 'package:policiacomunitaria/src/ui/pages/home/comp.home/comp.cardserv.dart';
+import 'package:policiacomunitaria/src/ui/widgets/widget_card.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_text.dart';
 
 class CompActionsHome extends StatelessWidget {
@@ -37,21 +38,38 @@ class CompActionsHome extends StatelessWidget {
             left: paddingHzApp,
             right: paddingHzApp,
           ),
-          Expanded(
-            child: GridView.count(
-              crossAxisCount: 2,
-              padding: EdgeInsets.symmetric(
-                horizontal: paddingHzApp,
-                vertical: paddingHzApp,
-              ),
-              children: List.generate(
-                ctrlServs.listServices.length,
-                (index) {
-                  return CompCardServ(serv: ctrlServs.listServices[index]);
-                },
-              ),
+
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: paddingHzApp,
+              vertical: paddingHzApp,
             ),
-          ),
+            child: Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: List.generate(
+                  ctrlServs.listServices.length,
+                  (index) {
+                    return CompCardServ(serv: ctrlServs.listServices[index]);
+                  },
+                )),
+          )
+          // Expanded(
+          //   child: GridView.count(
+          //     physics: const BouncingScrollPhysics(),
+          //     crossAxisCount: 2,
+          // padding: EdgeInsets.symmetric(
+          //   horizontal: paddingHzApp,
+          //   vertical: paddingHzApp,
+          // ),
+          //     children: List.generate(
+          // ctrlServs.listServices.length,
+          // (index) {
+          //   return CompCardServ(serv: ctrlServs.listServices[index]);
+          // },
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

@@ -3,6 +3,7 @@ import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
 import 'package:policiacomunitaria/src/theme/theme.dart';
 import 'package:policiacomunitaria/src/ui/pages/home/comp.home/comp.cont_actions.dart';
 import 'package:policiacomunitaria/src/ui/pages/home/comp.home/comp.home_header.dart';
+import 'package:policiacomunitaria/src/ui/widgets/widget_text.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

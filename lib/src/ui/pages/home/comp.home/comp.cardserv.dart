@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:policiacomunitaria/src/global/global.page_navigator.dart';
+import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
 import 'package:policiacomunitaria/src/models/models.services.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_card.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_text.dart';
@@ -15,6 +16,8 @@ class CompCardServ extends StatelessWidget {
         page: serv.page,
       ),
       child: CtCard(
+        height: 150,
+        width: width * 0.39,
         showShadow: true,
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),
