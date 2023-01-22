@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
 import 'package:policiacomunitaria/src/logic/controllers/ServicesCtrl.dart';
 import 'package:policiacomunitaria/src/ui/pages/home/comp.home/comp.cardserv.dart';
-import 'package:policiacomunitaria/src/ui/widgets/widget_card.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_text.dart';
 
 class CompActionsHome extends StatelessWidget {
@@ -38,23 +37,42 @@ class CompActionsHome extends StatelessWidget {
             left: paddingHzApp,
             right: paddingHzApp,
           ),
+          listServicesComp()
+        ],
+      ),
+    );
+  }
 
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: paddingHzApp,
-              vertical: paddingHzApp,
-            ),
-            child: Wrap(
-                alignment: WrapAlignment.center,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: List.generate(
-                  ctrlServs.listServices.length,
-                  (index) {
-                    return CompCardServ(serv: ctrlServs.listServices[index]);
-                  },
-                )),
-          )
-          // Expanded(
+  Widget listServicesComp() {
+    return Center(
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: List.generate(
+          ctrlServs.listServices.length,
+          (index) {
+            return CompCardServ(serv: ctrlServs.listServices[index]);
+          },
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//? MODO LISTA
+       // Expanded(
           //   child: GridView.count(
           //     physics: const BouncingScrollPhysics(),
           //     crossAxisCount: 2,
@@ -70,8 +88,3 @@ class CompActionsHome extends StatelessWidget {
           //     ),
           //   ),
           // ),
-        ],
-      ),
-    );
-  }
-}

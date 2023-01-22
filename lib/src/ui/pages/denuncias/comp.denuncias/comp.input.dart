@@ -24,12 +24,12 @@ class CompInptChat extends StatelessWidget {
               child: Input(
                 controller: ctrlChat.messageInpCtrl,
                 title: 'Escribir Mensaje...',
-                suffixIcon: Transform.rotate(
-                  angle: -10,
-                  child: const Icon(
-                    Icons.attachment_outlined,
-                  ),
-                ),
+                // suffixIcon: Transform.rotate(
+                //   angle: -10,
+                //   child: const Icon(
+                //     Icons.attachment_outlined,
+                //   ),
+                // ),
               ),
             ),
             Padding(
