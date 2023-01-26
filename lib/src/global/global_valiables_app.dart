@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:policiacomunitaria/src/theme/theme.dart';
 
 //Actions
@@ -8,7 +10,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 BuildContext? ctx = navigatorKey.currentContext;
 
 back() => Navigator.pop(ctx!);
-dismisKeybr(ctx) => FocusScope.of(ctx).requestFocus(FocusNode());
+void dismisKeybr() => Get.focusScope!.unfocus();
 
 //Global Theme
 ThemeData theme = Theme.of(ctx!);
@@ -35,3 +37,6 @@ String toTitleCase(text) => text
     .join(' ');
 
 // const myLocation = LatLng(-12.0562176, -77.0296812);
+
+//import firebase db
+final FirebaseFirestore db = FirebaseFirestore.instance;

@@ -96,6 +96,7 @@ button(
     default:
       return Button(
         textbtn: text,
+        colorText: Colors.white,
         disable: disable,
         load: load,
         padding: padding,

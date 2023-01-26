@@ -12,7 +12,7 @@ class PageDenuncias extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => dismisKeybr(ctx),
+      onTap: () => dismisKeybr(),
       child: Scaffold(
         appBar: customAppbar(
           title: 'Denuncias',

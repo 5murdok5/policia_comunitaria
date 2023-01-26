@@ -5,11 +5,15 @@ class UserModel {
   String? dni;
   String? name;
   String? email;
+  String? userApp;
+  String? direccion;
   String? idUser;
   UserModel({
     this.dni,
     this.name,
     this.email,
+    this.userApp,
+    this.direccion,
     this.idUser,
   });
 
@@ -17,12 +21,16 @@ class UserModel {
     String? dni,
     String? name,
     String? email,
+    String? userApp,
+    String? direccion,
     String? idUser,
   }) {
     return UserModel(
       dni: dni ?? this.dni,
       name: name ?? this.name,
       email: email ?? this.email,
+      userApp: userApp ?? this.userApp,
+      direccion: direccion ?? this.direccion,
       idUser: idUser ?? this.idUser,
     );
   }
@@ -32,6 +40,8 @@ class UserModel {
       'dni': dni,
       'name': name,
       'email': email,
+      'userApp': userApp,
+      'direccion': direccion,
       'idUser': idUser,
     };
   }
@@ -41,6 +51,8 @@ class UserModel {
       dni: map['dni'] != null ? map['dni'] as String : null,
       name: map['name'] != null ? map['name'] as String : null,
       email: map['email'] != null ? map['email'] as String : null,
+      userApp: map['userApp'] != null ? map['userApp'] as String : null,
+      direccion: map['direccion'] != null ? map['direccion'] as String : null,
       idUser: map['idUser'] != null ? map['idUser'] as String : null,
     );
   }
@@ -52,7 +64,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(dni: $dni, name: $name, email: $email, idUser: $idUser)';
+    return 'UserModel(dni: $dni, name: $name, email: $email, userApp: $userApp, direccion: $direccion, idUser: $idUser)';
   }
 
   @override
@@ -62,11 +74,18 @@ class UserModel {
     return other.dni == dni &&
         other.name == name &&
         other.email == email &&
+        other.userApp == userApp &&
+        other.direccion == direccion &&
         other.idUser == idUser;
   }
 
   @override
   int get hashCode {
-    return dni.hashCode ^ name.hashCode ^ email.hashCode ^ idUser.hashCode;
+    return dni.hashCode ^
+        name.hashCode ^
+        email.hashCode ^
+        userApp.hashCode ^
+        direccion.hashCode ^
+        idUser.hashCode;
   }
 }

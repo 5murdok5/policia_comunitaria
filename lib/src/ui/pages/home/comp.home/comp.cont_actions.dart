@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
 import 'package:policiacomunitaria/src/logic/controllers/ServicesCtrl.dart';
 import 'package:policiacomunitaria/src/ui/pages/home/comp.home/comp.cardserv.dart';
+import 'package:policiacomunitaria/src/ui/pages/home/comp.home/comp_list_solictudes.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_text.dart';
 
 class CompActionsHome extends StatelessWidget {
@@ -19,26 +20,27 @@ class CompActionsHome extends StatelessWidget {
           top: Radius.circular(40),
         ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          text(
-            'Selcciona Un Servicio',
-            type: 'subtitle',
-            left: paddingHzApp,
-            right: paddingHzApp,
-            top: 20,
-            bottom: 10,
-          ),
-          text(
-            'Todas las alertas son monitoreadas, No uses el sistema si no es necesario, tu seguridad es nuestra responsabilidad',
-            left: paddingHzApp,
-            right: paddingHzApp,
-          ),
-          listServicesComp()
-        ],
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        padding: EdgeInsets.symmetric(horizontal: paddingHzApp),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            text(
+              'Selcciona Un Servicio',
+              type: 'subtitle',
+              top: 20,
+              bottom: 10,
+            ),
+            text(
+              'Todas las alertas son monitoreadas, No uses el sistema si no es necesario, tu seguridad es nuestra responsabilidad',
+            ),
+            listServicesComp(),
+            // const CompListSolicitudes(),
+          ],
+        ),
       ),
     );
   }
