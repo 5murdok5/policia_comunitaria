@@ -26,8 +26,22 @@ class PageRegister extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
-                topSection(),
+                FadeIn(
+                  delay: const Duration(
+                    milliseconds: 300,
+                  ),
+                  duration: const Duration(
+                    milliseconds: 500,
+                  ),
+                  child: topSection(),
+                ),
                 FadeInUp(
+                  delay: const Duration(
+                    milliseconds: 200,
+                  ),
+                  duration: const Duration(
+                    milliseconds: 300,
+                  ),
                   child: formSection(),
                 ),
               ],
@@ -46,32 +60,29 @@ class PageRegister extends StatelessWidget {
       child: Stack(
         children: [
           const ArrowBackBtn(),
-          FadeIn(
-            delay: const Duration(milliseconds: 500),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(
-                    "assets/imgs/app_logo.png",
-                    height: 126,
-                    width: 126,
-                  ),
-                  text(
-                    'Policia Comunitaria',
-                    type: 'subtitle',
-                    color: Colors.white,
-                    top: 20,
-                  ),
-                  text(
-                    'Al servicio de la comunidad',
-                    color: const Color.fromARGB(207, 255, 255, 255),
-                    top: 5,
-                  ),
-                ],
-              ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  "assets/imgs/app_logo.png",
+                  height: 126,
+                  width: 126,
+                ),
+                text(
+                  'Policia Comunitaria',
+                  type: 'subtitle',
+                  color: Colors.white,
+                  top: 20,
+                ),
+                text(
+                  'Al servicio de la comunidad',
+                  color: const Color.fromARGB(207, 255, 255, 255),
+                  top: 5,
+                ),
+              ],
             ),
           ),
         ],
@@ -119,7 +130,7 @@ class PageRegister extends StatelessWidget {
                       Obx(
                         () => Input(
                           title: 'Identificación',
-                          controller: _.userCtrl,
+                          controller: _.rucCtrl,
                           uppercasse: false,
                           maxLines: 1,
                           enable: !_.loadLogin,
@@ -138,7 +149,7 @@ class PageRegister extends StatelessWidget {
                       Obx(
                         () => Input(
                           title: 'Nombres',
-                          controller: _.userCtrl,
+                          controller: _.nameCtrl,
                           uppercasse: false,
                           maxLines: 1,
                           enable: !_.loadLogin,
@@ -157,7 +168,7 @@ class PageRegister extends StatelessWidget {
                       Obx(
                         () => Input(
                           title: 'Email',
-                          controller: _.userCtrl,
+                          controller: _.emailCtrl,
                           uppercasse: false,
                           maxLines: 1,
                           enable: !_.loadLogin,
@@ -206,7 +217,7 @@ class PageRegister extends StatelessWidget {
                       Obx(
                         () => Input(
                           title: 'Re-Contraseña',
-                          controller: _.passCtrl,
+                          controller: _.repassCtrl,
                           uppercasse: false,
                           enable: !_.loadLogin,
                           padding: EdgeInsets.symmetric(
@@ -227,19 +238,22 @@ class PageRegister extends StatelessWidget {
                             if (value!.isEmpty) {
                               return 'Ingrese su contraseña';
                             }
+                            if (value != _.passCtrl.text) {
+                              return 'Las contraseñas no son iguales';
+                            }
                             return null;
                           },
                         ),
                       ),
                       Obx(
                         () => button(
-                          'Ingresar',
+                          'Registrarse',
                           load: _.loadLogin,
                           margin: EdgeInsets.symmetric(
                             horizontal: paddingHzApp - 15,
                             vertical: 8,
                           ),
-                          onTap: () => _.loginUser(),
+                          onTap: () => _.registerUser(),
                         ),
                       )
                     ],

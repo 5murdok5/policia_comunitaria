@@ -25,8 +25,22 @@ class PageLogin extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
-                topSection(),
+                FadeIn(
+                  delay: const Duration(
+                    milliseconds: 300,
+                  ),
+                  duration: const Duration(
+                    milliseconds: 500,
+                  ),
+                  child: topSection(),
+                ),
                 FadeInUp(
+                  delay: const Duration(
+                    milliseconds: 200,
+                  ),
+                  duration: const Duration(
+                    milliseconds: 300,
+                  ),
                   child: formSection(),
                 ),
               ],
@@ -45,32 +59,29 @@ class PageLogin extends StatelessWidget {
       child: Stack(
         children: [
           const ArrowBackBtn(),
-          FadeIn(
-            delay: const Duration(milliseconds: 500),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(
-                    "assets/imgs/app_logo.png",
-                    height: 126,
-                    width: 126,
-                  ),
-                  text(
-                    'Policia Comunitaria',
-                    type: 'subtitle',
-                    color: Colors.white,
-                    top: 20,
-                  ),
-                  text(
-                    'Al servicio de la comunidad',
-                    color: const Color.fromARGB(207, 255, 255, 255),
-                    top: 5,
-                  ),
-                ],
-              ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  "assets/imgs/app_logo.png",
+                  height: 126,
+                  width: 126,
+                ),
+                text(
+                  'Policia Comunitaria',
+                  type: 'subtitle',
+                  color: Colors.white,
+                  top: 20,
+                ),
+                text(
+                  'Al servicio de la comunidad',
+                  color: const Color.fromARGB(207, 255, 255, 255),
+                  top: 5,
+                ),
+              ],
             ),
           ),
         ],

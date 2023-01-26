@@ -53,11 +53,29 @@ class AuthReposiry {
   Future<UserCredential?> registerEmailAndPass(
     String email,
     String pass,
-  ) async =>
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: '${email.split('@')[0]}@policiacomunitaria.com',
+  ) async {
+    try {
+      final userEmial = email.split('@')[0];
+      return await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: '$userEmial@policiacomunitaria.com',
         password: pass,
       );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        showToast('su contraseña es demaciado corta', type: 'error');
+      } else if (e.code == 'email-already-in-use') {
+        showToast('Ud ya tiene una cuenta registrada!!', type: 'error');
+      } else {
+        log('error firebase: $e');
+        showToast('Error inesperado, $e', type: 'error');
+      }
+      return null;
+    } catch (e) {
+      log('error registro usuario:  $e');
+      showToast('error al registrar usuario, intente nuevamente');
+      return null;
+    }
+  }
 
   Future<UserModel?> saveUserDb(
     String idUser,
@@ -121,6 +139,12 @@ class AuthReposiry {
         showToast('su contraseña es demaciado corta');
       } else if (e.code == 'email-already-in-use') {
         showToast('Ud ya tiene una cuenta registrada!!');
+      } else {
+        log('error firebase: $e');
+        showToast(
+          'error al registrar usuario, intente nuevamente, e',
+          type: 'error',
+        );
       }
       return null;
     } catch (e) {

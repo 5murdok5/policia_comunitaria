@@ -62,6 +62,7 @@ class Input extends StatelessWidget {
         obscureText: obscureText ?? false,
         autofocus: autofocus,
         maxLines: maxLines,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         enabled: enable,
         onChanged: onChanged,
         style: theme.textTheme.bodyText1!.copyWith(

@@ -82,7 +82,7 @@ class LoginController extends GetxController {
   registerUser() async {
     loadLogin = true;
     if (passCtrl.text != repassCtrl.text) {
-      showToast('Las contraseñas no coinciden, intente nuevamente');
+      showToast('Las contraseñas no son iguales, intente nuevamente');
       loadLogin = false;
       return;
     }
