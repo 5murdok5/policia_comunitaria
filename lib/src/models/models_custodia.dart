@@ -9,6 +9,7 @@ class ModelCustodia {
   String? lugarSalida;
   String? lugarDestino;
   String? motivo;
+  String? idCustodia;
   ModelCustodia({
     this.idUsuario,
     this.idAgente,
@@ -17,6 +18,7 @@ class ModelCustodia {
     this.lugarSalida,
     this.lugarDestino,
     this.motivo,
+    this.idCustodia,
   });
 
   ModelCustodia copyWith({
@@ -27,6 +29,7 @@ class ModelCustodia {
     String? lugarSalida,
     String? lugarDestino,
     String? motivo,
+    String? idCustodia,
   }) {
     return ModelCustodia(
       idUsuario: idUsuario ?? this.idUsuario,
@@ -36,6 +39,7 @@ class ModelCustodia {
       lugarSalida: lugarSalida ?? this.lugarSalida,
       lugarDestino: lugarDestino ?? this.lugarDestino,
       motivo: motivo ?? this.motivo,
+      idCustodia: idCustodia ?? this.idCustodia,
     );
   }
 
@@ -48,6 +52,7 @@ class ModelCustodia {
       'lugarSalida': lugarSalida,
       'lugarDestino': lugarDestino,
       'motivo': motivo,
+      'idCustodia': idCustodia,
     };
   }
 
@@ -66,6 +71,8 @@ class ModelCustodia {
       lugarDestino:
           map['lugarDestino'] != null ? map['lugarDestino'] as String : null,
       motivo: map['motivo'] != null ? map['motivo'] as String : null,
+      idCustodia:
+          map['idCustodia'] != null ? map['idCustodia'] as String : null,
     );
   }
 
@@ -76,7 +83,7 @@ class ModelCustodia {
 
   @override
   String toString() {
-    return 'ModelCustodia(idUsuario: $idUsuario, idAgente: $idAgente, infoAceptado: $infoAceptado, fechaCreado: $fechaCreado, lugarSalida: $lugarSalida, lugarDestino: $lugarDestino, motivo: $motivo)';
+    return 'ModelCustodia(idUsuario: $idUsuario, idAgente: $idAgente, infoAceptado: $infoAceptado, fechaCreado: $fechaCreado, lugarSalida: $lugarSalida, lugarDestino: $lugarDestino, motivo: $motivo, idCustodia: $idCustodia)';
   }
 
   @override
@@ -89,7 +96,8 @@ class ModelCustodia {
         other.fechaCreado == fechaCreado &&
         other.lugarSalida == lugarSalida &&
         other.lugarDestino == lugarDestino &&
-        other.motivo == motivo;
+        other.motivo == motivo &&
+        other.idCustodia == idCustodia;
   }
 
   @override
@@ -100,7 +108,8 @@ class ModelCustodia {
         fechaCreado.hashCode ^
         lugarSalida.hashCode ^
         lugarDestino.hashCode ^
-        motivo.hashCode;
+        motivo.hashCode ^
+        idCustodia.hashCode;
   }
 }
 

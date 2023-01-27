@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
-String formatDate({required DateTime time, bool dateOnly = false}) {
+String formatDate({
+  required DateTime time,
+  bool dateOnly = false,
+  bool timeOnly = false,
+}) {
   String year = time.year.toString();
 
   // Add "0" on the left if month is from 1 to 9
@@ -19,6 +23,9 @@ String formatDate({required DateTime time, bool dateOnly = false}) {
   String second = time.second.toString();
 
   // If you only want year, month, and date
+  if (timeOnly == true) {
+    return "$hour:$minute";
+  }
   if (dateOnly == false) {
     return "$day/$month/$year $hour:$minute:$second";
   }

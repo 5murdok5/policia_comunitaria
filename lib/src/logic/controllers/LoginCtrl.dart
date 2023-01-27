@@ -64,11 +64,15 @@ class LoginController extends GetxController {
     if (loginForm.currentState!.validate()) {
       dismisKeybr();
       final UserModel? user =
-          await _auth.loginUser(userCtrl.text, passCtrl.text);
+          await _auth.loginUser(userCtrl.text.trim(), passCtrl.text);
       if (user != null) {
-        AppController appCtrl = Get.find();
+        // AppController appCtrl = Get.find();
+        AppController appCtrl = Get.put(AppController());
         appCtrl.userData = user;
-        showToast('Bienvenido a Rapifas', type: 'success');
+        showToast('Bienvenido ${user.name!.toUpperCase()}!!', type: 'success');
+        toPage(
+          page: const HomePage(),
+        );
       }
       loadLogin = false;
     } else {
@@ -98,8 +102,10 @@ class LoginController extends GetxController {
       if (user != null) {
         final AppController appCtrl = Get.find();
         appCtrl.userData = user;
+        showToast('Bienvenido!! ${user.name?.toUpperCase()}', type: 'success');
         toPage(
-          page: const HomePage(),
+          page: HomePage(),
+          removePreviusPages: true,
         );
       }
       loadLogin = false;

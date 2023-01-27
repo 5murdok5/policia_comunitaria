@@ -4,7 +4,8 @@ import 'package:policiacomunitaria/src/theme/theme.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_text.dart';
 
 class CompHeader extends StatelessWidget {
-  const CompHeader({super.key});
+  final GlobalKey<ScaffoldState> keyscf;
+  const CompHeader({super.key, required this.keyscf});
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +33,15 @@ class CompHeader extends StatelessWidget {
               ],
             ),
           ),
-          const CircleAvatar(
-            backgroundColor: Colors.white,
-            child: Center(
-              child: Icon(
-                Icons.person,
-                color: kprimaryColor,
+          InkWell(
+            onTap: () => keyscf.currentState!.openDrawer(),
+            child: const CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Center(
+                child: Icon(
+                  Icons.menu,
+                  color: kprimaryColor,
+                ),
               ),
             ),
           )

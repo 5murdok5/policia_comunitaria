@@ -21,3 +21,9 @@ Future<UserModel?> getUserSt() async {
   }
   return UserModel();
 }
+
+Future<void> deleteStorage() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.clear();
+  return;
+}

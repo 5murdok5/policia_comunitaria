@@ -8,7 +8,7 @@ import 'package:policiacomunitaria/src/ui/pages/splash/page.splash.dart';
 class Routes {
   static final Map<String, Widget Function(BuildContext)> routes = {
     '/': (context) => const PageSplash(),
-    '/home': (context) => const HomePage(),
+    '/home': (context) => HomePage(),
     '/login': (context) => const PageLogin(),
     '/register': (context) => const PageRegister(),
     '/custodia': (context) => const PageCustodia(),

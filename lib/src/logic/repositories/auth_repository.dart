@@ -1,26 +1,38 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 import 'package:policiacomunitaria/src/global/actions/actions.toast.dart';
+import 'package:policiacomunitaria/src/global/global.page_navigator.dart';
+import 'package:policiacomunitaria/src/global/global_sharedpreferences.dart';
 import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
+import 'package:policiacomunitaria/src/logic/controllers/ctrl_app.dart';
 import 'package:policiacomunitaria/src/logic/repositories/user_repository.dart';
 import 'package:policiacomunitaria/src/models/models.user.dart';
+import 'package:policiacomunitaria/src/ui/pages/splash/page.splash.dart';
 
 class AuthReposiry {
   Future<UserCredential?> firebaseLoginEmail(String user, String pass) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: '${user.trim().toString()}@rapifas.com', password: pass);
+          .signInWithEmailAndPassword(email: user, password: pass);
       return userCredential;
     } on FirebaseAuthException catch (e) {
+      log('error: $e');
       if (e.code == 'user-not-found') {
         log('No user found for that email.');
-        showToast('Este usuario no ha sido registrado');
+        showToast('Este usuario no ha sido registrado', type: 'error');
+        return null;
       }
       if (e.code == 'wrong-password') {
         log('Contraseña Incorrecta, vuelva a intentarlo');
-        showToast('Contraseña Incorrecta, vuelva a intentarlo');
+        showToast('Contraseña Incorrecta, vuelva a intentarlo', type: 'error');
+        return null;
+      }
+      if (e.code == 'invalid-email]') {
+        log('correo incorrecto');
+        showToast('El usuario es incorrecto', type: 'error');
+        return null;
       }
       showToast(e.code);
       return null;
@@ -32,7 +44,7 @@ class AuthReposiry {
 
   Future<UserModel?> loginUser(String email, String password) async {
     final UserCredential? respLoginFb =
-        await firebaseLoginEmail(email, password);
+        await firebaseLoginEmail('$email@policiacomunitaria.com', password);
     if (respLoginFb != null) {
       final UserModel? respGetDataUser =
           await getUserFromDB(respLoginFb.user!.uid);
@@ -152,5 +164,15 @@ class AuthReposiry {
       showToast('error al registrar usuario, intente nuevamente');
       return null;
     }
+  }
+
+  Future<void> logOutuser() async {
+    await FirebaseAuth.instance.signOut();
+    Get.deleteAll();
+    toPage(
+      page: const PageSplash(),
+    );
+    Get.put(AppController());
+    deleteStorage();
   }
 }

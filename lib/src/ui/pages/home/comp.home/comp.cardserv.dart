@@ -7,20 +7,21 @@ import 'package:policiacomunitaria/src/ui/widgets/widget_text.dart';
 
 class CompCardServ extends StatelessWidget {
   final ModelServices serv;
-  const CompCardServ({super.key, required this.serv});
+  final Widget? page;
+  const CompCardServ({super.key, required this.serv, this.page});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => toPage(
-        page: serv.page,
+        page: page,
       ),
       child: CtCard(
-        height: 150,
+        height: height * 0.20,
         width: width * 0.39,
         showShadow: true,
         margin: const EdgeInsets.all(10),
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(20),
         color: serv.title == 'Emergencia' ? Colors.amber : Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -29,7 +30,7 @@ class CompCardServ extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
-                margin: const EdgeInsets.all(25),
+                margin: EdgeInsets.all(width * 0.06),
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: NetworkImage(

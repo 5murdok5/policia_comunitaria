@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:policiacomunitaria/src/global/global_sharedpreferences.dart';
 import 'package:policiacomunitaria/src/models/models.user.dart';
 
 class UserController extends GetxController {
@@ -12,11 +13,8 @@ class UserController extends GetxController {
     super.onInit();
   }
 
-  checkUserOnStorage() {
-    userDt = UserModel(
-        dni: '1105147951',
-        email: 'santiago.moreno52@gmail.com',
-        idUser: 'userlocal',
-        name: 'Santiago Moreno');
+  checkUserOnStorage() async {
+    final userSt = await getUserSt();
+    userDt = userSt ?? UserModel();
   }
 }

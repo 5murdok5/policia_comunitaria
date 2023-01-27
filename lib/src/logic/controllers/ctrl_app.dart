@@ -1,9 +1,11 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:policiacomunitaria/src/global/actions/actions.toast.dart';
 import 'package:policiacomunitaria/src/global/global.page_navigator.dart';
 import 'package:policiacomunitaria/src/logic/repositories/user_repository.dart';
 import 'package:policiacomunitaria/src/models/models.user.dart';
+import 'package:policiacomunitaria/src/models/models_custodia.dart';
 import 'package:policiacomunitaria/src/ui/pages/home/page.home.dart';
 
 class AppController extends GetxController {
@@ -13,6 +15,10 @@ class AppController extends GetxController {
   final Rx<UserModel?> _userData = UserModel().obs;
   UserModel? get userData => _userData.value;
   set userData(UserModel? value) => _userData.value = value;
+
+  final RxList<ModelCustodia> _listCustodias = <ModelCustodia>[].obs;
+  List<ModelCustodia> get listCustodias => _listCustodias;
+  set listCustodias(List<ModelCustodia> value) => _listCustodias.value = value;
   // Counter Data
 
   @override
@@ -29,7 +35,9 @@ class AppController extends GetxController {
       final respUser = await userRp.checkUserDataStorage();
       userData = respUser;
       if (respUser?.idUser != null) {
-        toPage(removePreviusPages: true, page: const HomePage());
+        toPage(page: const HomePage());
+        showToast('Bienvenido!! ${respUser?.name?.toUpperCase()}',
+            type: 'success');
       }
     });
   }

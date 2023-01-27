@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:policiacomunitaria/src/logic/controllers/ctrl_app.dart';
 import 'package:policiacomunitaria/src/models/models_custodia.dart';
 
 class CustodiaController extends GetxController {
@@ -15,10 +16,6 @@ class CustodiaController extends GetxController {
   TimeOfDay? get hora => _hora.value;
   set hora(TimeOfDay? value) => _hora.value = value;
 
-  final RxList<ModelCustodia> _listCustodias = <ModelCustodia>[].obs;
-  List<ModelCustodia> get listCustodias => _listCustodias;
-  set listCustodias(List<ModelCustodia> value) => _listCustodias.value = value;
-
   @override
   void onInit() {
     lugarSalidaCtrl = TextEditingController();
@@ -33,5 +30,17 @@ class CustodiaController extends GetxController {
     lugarDestinoCtrl.dispose();
     motivoSolicitud.dispose();
     super.onClose();
+  }
+
+  Future<void> enviarCustodia() async {
+    AppController appCtrl = Get.find();
+    final ModelCustodia data = ModelCustodia(
+      fechaCreado: DateTime.now().microsecondsSinceEpoch,
+      idAgente: null,
+      idUsuario: appCtrl.userData!.idUser!,
+      lugarDestino: lugarDestinoCtrl.text,
+      lugarSalida: lugarSalidaCtrl.text,
+      motivo: motivoSolicitud.text,
+    );
   }
 }

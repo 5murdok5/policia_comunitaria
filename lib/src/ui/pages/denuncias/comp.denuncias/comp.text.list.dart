@@ -1,27 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:policiacomunitaria/src/global/actions/actions.dateformat.dart';
 import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
-import 'package:policiacomunitaria/src/logic/controllers/UserCtrl.dart';
 import 'package:policiacomunitaria/src/logic/controllers/chatCtrl.dart';
+import 'package:policiacomunitaria/src/logic/controllers/ctrl_app.dart';
 import 'package:policiacomunitaria/src/models/models.message.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_text.dart';
 
 class CompChatList extends StatelessWidget {
   CompChatList({super.key});
   final ChatController smsCtrl = Get.find();
-  final UserController userCtrl = Get.find();
+  // final UserController userCtrl = Get.find();
+  final AppController appCtrl = Get.find();
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => ListView.builder(
         physics: const BouncingScrollPhysics(),
         itemCount: smsCtrl.listMessages.length,
-        reverse: true,
+        controller: smsCtrl.listController,
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return messageComp(
             isMine:
-                userCtrl.userDt.idUser == smsCtrl.listMessages[index].idUser,
+                appCtrl.userData!.idUser == smsCtrl.listMessages[index].idUser,
             message: smsCtrl.listMessages[index],
           );
         },
@@ -48,6 +50,8 @@ class CompChatList extends StatelessWidget {
               ),
             ),
             child: Column(
+              crossAxisAlignment:
+                  isMine ? CrossAxisAlignment.end : CrossAxisAlignment.start,
               children: [
                 text(
                   message?.message ?? 'sms',
@@ -57,10 +61,15 @@ class CompChatList extends StatelessWidget {
                   alignment:
                       !isMine ? Alignment.centerLeft : Alignment.centerRight,
                   child: text(
-                    '10:35 pm',
+                    formatDate(
+                      time: DateTime.fromMillisecondsSinceEpoch(
+                        message!.dateSend!,
+                      ),
+                      timeOnly: true,
+                    ),
                     top: 5,
                     type: 'body1',
-                    size: 11,
+                    size: 10,
                     color: const Color.fromARGB(255, 87, 87, 87),
                   ),
                 )
