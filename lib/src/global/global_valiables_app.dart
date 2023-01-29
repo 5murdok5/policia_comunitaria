@@ -10,16 +10,16 @@ import 'package:policiacomunitaria/src/theme/theme.dart';
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 BuildContext? ctx = navigatorKey.currentContext;
 
-back() => Navigator.pop(ctx!);
+back() => Get.back();
 void dismisKeybr() => Get.focusScope!.unfocus();
 
 //Global Theme
-ThemeData theme = Theme.of(ctx!);
+ThemeData theme = Get.theme;
 Themes th = Themes();
 
 //size screen
-double height = MediaQuery.of(ctx!).size.height;
-double width = MediaQuery.of(ctx!).size.width;
+double height = Get.size.height;
+double width = Get.size.width;
 Size size = MediaQuery.of(ctx!).size;
 
 //  paddings
