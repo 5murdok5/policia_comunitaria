@@ -1,8 +1,11 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:policiacomunitaria/src/global/global.page_navigator.dart';
 import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
+import 'package:policiacomunitaria/src/logic/controllers/appCtrl.dart';
 import 'package:policiacomunitaria/src/logic/repositories/auth_repository.dart';
+import 'package:policiacomunitaria/src/logic/repositories/emergencia_repository.dart';
 import 'package:policiacomunitaria/src/theme/theme.dart';
 import 'package:policiacomunitaria/src/ui/pages/home/comp.home/comp.cont_actions.dart';
 import 'package:policiacomunitaria/src/ui/pages/home/comp.home/comp.home_header.dart';
@@ -11,28 +14,33 @@ import 'package:policiacomunitaria/src/ui/widgets/widget_card.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_text.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  final AppController appCtrl = Get.find();
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     return WillPopScope(
       onWillPop: () async => false,
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: kprimaryColor,
-        drawer: drawerMenu(),
-        body: SafeArea(
-          child: Column(
-            children: [
-              CompHeader(keyscf: scaffoldKey),
-              SizedBox(
-                height: height * 0.04,
-              ),
-              const Expanded(
-                child: CompActionsHome(),
-              ),
-            ],
+      child: Obx(
+        () => Scaffold(
+          key: scaffoldKey,
+          backgroundColor: appCtrl.modeAlert ? Colors.redAccent : kprimaryColor,
+          floatingActionButton:
+              appCtrl.modeAlert ? btnCancelSolicitud() : const SizedBox(),
+          drawer: drawerMenu(),
+          body: SafeArea(
+            child: Column(
+              children: [
+                CompHeader(keyscf: scaffoldKey),
+                SizedBox(
+                  height: height * 0.04,
+                ),
+                const Expanded(
+                  child: CompActionsHome(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -111,6 +119,35 @@ class HomePage extends StatelessWidget {
               size: 15,
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget btnCancelSolicitud() {
+    return FadeIn(
+      child: InkWell(
+        onTap: () => EmergenciaRepository().cancelarAlert(),
+        child: CtCard(
+          color: Colors.redAccent,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flash(
+                duration: const Duration(seconds: 3),
+                infinite: true,
+                child: const Icon(
+                  Icons.emergency,
+                  color: Colors.white,
+                ),
+              ),
+              text(
+                'Cancelar Emergencia',
+                color: Colors.white,
+                left: 5,
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:policiacomunitaria/src/logic/controllers/ctrl_app.dart';
+import 'package:policiacomunitaria/src/logic/controllers/appCtrl.dart';
 
 class UserInfoController extends GetxController {
   var nameCtrl = TextEditingController();

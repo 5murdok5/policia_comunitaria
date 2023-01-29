@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:policiacomunitaria/src/models/models_emergencia.dart';
+
 class UserModel {
   String? dni;
   String? name;
@@ -8,6 +10,7 @@ class UserModel {
   String? userApp;
   String? direccion;
   String? idUser;
+  Location? userLocation;
   UserModel({
     this.dni,
     this.name,
@@ -15,6 +18,7 @@ class UserModel {
     this.userApp,
     this.direccion,
     this.idUser,
+    this.userLocation,
   });
 
   UserModel copyWith({

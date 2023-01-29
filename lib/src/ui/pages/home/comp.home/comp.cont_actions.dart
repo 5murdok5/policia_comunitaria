@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
+import 'package:policiacomunitaria/src/logic/controllers/appCtrl.dart';
 import 'package:policiacomunitaria/src/ui/pages/custodia/page.custodia.dart';
 import 'package:policiacomunitaria/src/ui/pages/denuncias/page.denuncias.dart';
 import 'package:policiacomunitaria/src/ui/pages/emergencia/page.emergencia.dart';
@@ -47,6 +50,7 @@ class CompActionsHome extends StatelessWidget {
   }
 
   Widget listServicesComp() {
+    AppController appctrl = Get.find();
     return Center(
       child: Wrap(
         alignment: WrapAlignment.center,
@@ -54,9 +58,12 @@ class CompActionsHome extends StatelessWidget {
         children: List.generate(
           listServicesMd.length,
           (index) {
-            return CompCardServ(
-              serv: listServicesMd[index],
-              page: listPages()[index],
+            return Obx(
+              () => CompCardServ(
+                serv: listServicesMd[index],
+                page: listPages()[index],
+                alertMode: appctrl.modeAlert,
+              ),
             );
           },
         ),
