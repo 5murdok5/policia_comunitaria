@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:policiacomunitaria/src/global/actions/actions.toast.dart';
 import 'package:policiacomunitaria/src/global/global.page_navigator.dart';
 import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
-import 'package:policiacomunitaria/src/logic/controllers/ctrl_app.dart';
+import 'package:policiacomunitaria/src/logic/controllers/appCtrl.dart';
 import 'package:policiacomunitaria/src/logic/repositories/auth_repository.dart';
 import 'package:policiacomunitaria/src/models/models.user.dart';
 import 'package:policiacomunitaria/src/ui/pages/home/page.home.dart';
@@ -71,7 +71,7 @@ class LoginController extends GetxController {
         appCtrl.userData = user;
         showToast('Bienvenido ${user.name!.toUpperCase()}!!', type: 'success');
         toPage(
-          page: const HomePage(),
+          page: HomePage(),
         );
       }
       loadLogin = false;

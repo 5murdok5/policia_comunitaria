@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:policiacomunitaria/src/logic/controllers/ctrl_app.dart';
+import 'package:policiacomunitaria/src/logic/controllers/appCtrl.dart';
 import 'package:policiacomunitaria/src/models/models_custodia.dart';
 
 class CustodiaController extends GetxController {

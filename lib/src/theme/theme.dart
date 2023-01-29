@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const Color KmodeALertColor = Colors.redAccent;
+
 const Color kprimaryColor = Color(0xFF0B195E);
 const Color kSecondaryColor = Color(0xFF1c232f);
 const Color kSecondaryColorDark = Color.fromARGB(255, 13, 32, 65);

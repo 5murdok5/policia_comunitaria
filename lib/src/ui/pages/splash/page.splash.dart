@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:policiacomunitaria/src/global/global.page_navigator.dart';
 import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
-import 'package:policiacomunitaria/src/logic/controllers/ctrl_app.dart';
+import 'package:policiacomunitaria/src/logic/controllers/appCtrl.dart';
 import 'package:policiacomunitaria/src/theme/theme.dart';
 import 'package:policiacomunitaria/src/ui/pages/login/page.login.dart';
 import 'package:policiacomunitaria/src/ui/pages/login/page_register.dart';

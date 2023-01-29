@@ -6,7 +6,7 @@ import 'package:policiacomunitaria/src/global/actions/actions.toast.dart';
 import 'package:policiacomunitaria/src/global/global.page_navigator.dart';
 import 'package:policiacomunitaria/src/global/global_sharedpreferences.dart';
 import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
-import 'package:policiacomunitaria/src/logic/controllers/ctrl_app.dart';
+import 'package:policiacomunitaria/src/logic/controllers/appCtrl.dart';
 import 'package:policiacomunitaria/src/logic/repositories/user_repository.dart';
 import 'package:policiacomunitaria/src/models/models.user.dart';
 import 'package:policiacomunitaria/src/ui/pages/splash/page.splash.dart';

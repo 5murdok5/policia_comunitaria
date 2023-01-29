@@ -27,3 +27,18 @@ Future<void> deleteStorage() async {
   prefs.clear();
   return;
 }
+
+Future<String> setidEmergenciaSt(String idEmergencia) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('idEmergencia', idEmergencia);
+  return idEmergencia;
+}
+
+Future<String> getidEmergenciaSt() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? repors = prefs.getString('idEmergencia');
+  if (repors != null && repors != '') {
+    return repors;
+  }
+  return '';
+}

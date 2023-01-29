@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
 import 'package:policiacomunitaria/src/theme/theme.dart';
+import 'package:policiacomunitaria/src/ui/widgets/widget_load.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_text.dart';
 
 dismiseToast() => ScaffoldMessenger.of(ctx!).hideCurrentSnackBar();
@@ -28,12 +29,12 @@ showToast(
   final snackBar = SnackBar(
     content: Row(
       children: [
-        // if (type == 'load')
-        //   loadwidget(
-        //     size: 22,
-        //     padding: const EdgeInsets.only(right: 15),
-        //     colorIndicator: color['text'],
-        //   ),
+        if (type == 'load')
+          loadwidget(
+            size: 22,
+            padding: const EdgeInsets.only(right: 15),
+            colorIndicator: color['text'],
+          ),
         Expanded(
           child: SizedBox(
             child: Column(
@@ -108,8 +109,8 @@ Map<String, Color> types(type) {
       };
     case 'warning':
       return {
-        'color': kprimaryColor.withAlpha(240),
-        'text': kSecondaryColor,
+        'color': Colors.amber.withAlpha(240),
+        'text': Colors.black,
       };
     case 'alert':
       return {

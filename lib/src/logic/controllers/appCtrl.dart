@@ -21,6 +21,10 @@ class AppController extends GetxController {
   set listCustodias(List<ModelCustodia> value) => _listCustodias.value = value;
   // Counter Data
 
+  final _modeAlert = false.obs;
+  get modeAlert => _modeAlert.value;
+  set modeAlert(value) => _modeAlert.value = value;
+
   @override
   void onInit() {
     setUser();
@@ -35,7 +39,7 @@ class AppController extends GetxController {
       final respUser = await userRp.checkUserDataStorage();
       userData = respUser;
       if (respUser?.idUser != null) {
-        toPage(page: const HomePage());
+        toPage(page: HomePage());
         showToast('Bienvenido!! ${respUser?.name?.toUpperCase()}',
             type: 'success');
       }
@@ -53,5 +57,9 @@ class AppController extends GetxController {
         log('error save user $e');
       }
     }
+  }
+
+  changeStatusEmergency(bool status) async {
+    modeAlert = status;
   }
 }

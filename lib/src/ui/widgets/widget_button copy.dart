@@ -57,7 +57,7 @@ button(
     case 'secondary_line':
       return Button(
         textbtn: text,
-        colorBtn: kSecondaryColor.withAlpha(200),
+        colorBtn: kprimaryColor.withAlpha(200),
         onlyBorder: true,
         disable: disable,
         load: load,
