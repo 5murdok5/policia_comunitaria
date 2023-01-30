@@ -34,85 +34,111 @@ class PageCustodia extends StatelessWidget {
               init: CustodiaController(),
               initState: (_) {},
               builder: (_) {
-                return Column(
-                  children: [
-                    text(
-                      'Para solicitar custodia policial, ingresa los datos a continuación',
-                      bottom: 25,
-                    ),
+                return Form(
+                  key: _.custodiaForm,
+                  child: Column(
+                    children: [
+                      text(
+                        'Para solicitar custodia policial, ingresa los datos a continuación',
+                        bottom: 25,
+                      ),
 
-                    Obx(
-                      () => btnSelectDate(
-                        (_.fecha == null
-                                ? 'Seleccionar Fecha'
-                                : formatDate(
-                                    time: _.fecha ?? DateTime.now(),
-                                    dateOnly: true,
-                                  ))
-                            .toString(),
-                        Icons.calendar_month,
-                        onTap: () async {
-                          _.fecha = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(), //get today's date
+                      Obx(
+                        () => btnSelectDate(
+                          (_.fecha == null
+                                  ? 'Seleccionar Fecha'
+                                  : formatDate(
+                                      time: _.fecha ?? DateTime.now(),
+                                      dateOnly: true,
+                                    ))
+                              .toString(),
+                          Icons.calendar_month,
+                          onTap: () async {
+                            _.fecha = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(), //get today's date
 
-                            firstDate: DateTime(
-                                2000), //DateTime.now() - not to allow to choose before today.
-                            lastDate: DateTime(2040),
-                          );
+                              firstDate: DateTime(
+                                  2000), //DateTime.now() - not to allow to choose before today.
+                              lastDate: DateTime(2040),
+                            );
+                          },
+                        ),
+                      ),
+
+                      Obx(
+                        () => btnSelectDate(
+                          (_.hora == null
+                                  ? 'Seleccionar Fecha'
+                                  : formatTime(
+                                      time: _.hora!,
+                                      dateOnly: true,
+                                    ))
+                              .toString(),
+                          Icons.timelapse_sharp,
+                          onTap: () async {
+                            _.hora = await showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay.now(),
+                            );
+                          },
+                        ),
+                      ),
+
+                      Input(
+                        title: 'Lugar de Salida',
+                        controller: _.lugarSalidaCtrl,
+                        prefixIcon: const Icon(
+                          Icons.location_city,
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Ingrese lugar de salida';
+                          }
+                          return null;
+                        },
+                        // padding: EdgeInsets.all(0),
+                      ),
+                      // openMapLocation(),
+                      Input(
+                        title: 'Lugar de Destino',
+                        controller: _.lugarDestinoCtrl,
+                        prefixIcon: const Icon(
+                          Icons.location_on,
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Ingrese lugar de destino';
+                          }
+                          return null;
+                        },
+                        // padding: EdgeInsets.all(0),
+                      ),
+                      // openMapLocation(),
+                      Input(
+                        title: 'Motivo de Solicitud',
+                        controller: _.motivoSolicitud,
+                        prefixIcon: const Icon(
+                          Icons.info,
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Ingrese Motivo';
+                          }
+                          return null;
                         },
                       ),
-                    ),
 
-                    Obx(
-                      () => btnSelectDate(
-                        (_.hora == null
-                                ? 'Seleccionar Fecha'
-                                : formatTime(
-                                    time: _.hora!,
-                                    dateOnly: true,
-                                  ))
-                            .toString(),
-                        Icons.timelapse_sharp,
-                        onTap: () async {
-                          _.hora = await showTimePicker(
-                            context: context,
-                            initialTime: TimeOfDay.now(),
-                          );
-                        },
-                      ),
-                    ),
-
-                    Input(
-                      title: 'Lugar de Salida',
-                      controller: _.lugarSalidaCtrl,
-                      prefixIcon: const Icon(
-                        Icons.location_city,
-                      ),
-                      // padding: EdgeInsets.all(0),
-                    ),
-                    // openMapLocation(),
-                    Input(
-                      title: 'Lugar de Destino',
-                      controller: _.lugarDestinoCtrl,
-                      prefixIcon: const Icon(
-                        Icons.location_on,
-                      ),
-                      // padding: EdgeInsets.all(0),
-                    ),
-                    // openMapLocation(),
-                    Input(
-                      title: 'Motivo de Solicitud',
-                      controller: _.motivoSolicitud,
-                      prefixIcon: const Icon(
-                        Icons.info,
-                      ),
-                    ),
-                    const Button(
-                      textbtn: 'Enviar Solicitud',
-                      colorText: Colors.white,
-                    )
-                  ],
+                      Obx(
+                        () => Button(
+                          textbtn: 'Enviar Solicitud',
+                          colorText: Colors.white,
+                          load: _.loadSend,
+                          onTap: () => _.enviarCustodia(),
+                        ),
+                      )
+                    ],
+                  ),
                 );
               },
             ),

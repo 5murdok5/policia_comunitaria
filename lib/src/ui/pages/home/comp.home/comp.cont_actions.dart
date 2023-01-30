@@ -7,6 +7,7 @@ import 'package:policiacomunitaria/src/ui/pages/custodia/page.custodia.dart';
 import 'package:policiacomunitaria/src/ui/pages/denuncias/page.denuncias.dart';
 import 'package:policiacomunitaria/src/ui/pages/emergencia/page.emergencia.dart';
 import 'package:policiacomunitaria/src/ui/pages/home/comp.home/comp.cardserv.dart';
+import 'package:policiacomunitaria/src/ui/pages/home/comp.home/comp_list_solictudes.dart';
 import 'package:policiacomunitaria/src/ui/pages/searchUpc/page.searchupc.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_text.dart';
 
@@ -42,7 +43,7 @@ class CompActionsHome extends StatelessWidget {
               bottom: 30,
             ),
             listServicesComp(),
-            // const CompListSolicitudes(),
+            CompListSolicitudes(),
           ],
         ),
       ),

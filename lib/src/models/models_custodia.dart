@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
+import 'package:policiacomunitaria/src/models/models_emergencia.dart';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class ModelCustodia {
   String? idUsuario;
@@ -10,6 +14,9 @@ class ModelCustodia {
   String? lugarDestino;
   String? motivo;
   String? idCustodia;
+  List<History>? history;
+  String estado;
+  int? fechaSalida;
   ModelCustodia({
     this.idUsuario,
     this.idAgente,
@@ -19,6 +26,9 @@ class ModelCustodia {
     this.lugarDestino,
     this.motivo,
     this.idCustodia,
+    this.history,
+    required this.estado,
+    this.fechaSalida,
   });
 
   ModelCustodia copyWith({
@@ -30,6 +40,9 @@ class ModelCustodia {
     String? lugarDestino,
     String? motivo,
     String? idCustodia,
+    List<History>? history,
+    String? estado,
+    int? fechaSalida,
   }) {
     return ModelCustodia(
       idUsuario: idUsuario ?? this.idUsuario,
@@ -40,6 +53,9 @@ class ModelCustodia {
       lugarDestino: lugarDestino ?? this.lugarDestino,
       motivo: motivo ?? this.motivo,
       idCustodia: idCustodia ?? this.idCustodia,
+      history: history ?? this.history,
+      estado: estado ?? this.estado,
+      fechaSalida: fechaSalida ?? this.fechaSalida,
     );
   }
 
@@ -53,6 +69,9 @@ class ModelCustodia {
       'lugarDestino': lugarDestino,
       'motivo': motivo,
       'idCustodia': idCustodia,
+      'history': history!.map((x) => x.toMap()).toList(),
+      'estado': estado,
+      'fechaSalida': fechaSalida,
     };
   }
 
@@ -73,6 +92,16 @@ class ModelCustodia {
       motivo: map['motivo'] != null ? map['motivo'] as String : null,
       idCustodia:
           map['idCustodia'] != null ? map['idCustodia'] as String : null,
+      history: map['history'] != null
+          ? List<History>.from(
+              (map['history'] as List<dynamic>).map<History?>(
+                (x) => History.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      estado: map['estado'] as String,
+      fechaSalida:
+          map['fechaSalida'] != null ? map['fechaSalida'] as int : null,
     );
   }
 
@@ -83,7 +112,7 @@ class ModelCustodia {
 
   @override
   String toString() {
-    return 'ModelCustodia(idUsuario: $idUsuario, idAgente: $idAgente, infoAceptado: $infoAceptado, fechaCreado: $fechaCreado, lugarSalida: $lugarSalida, lugarDestino: $lugarDestino, motivo: $motivo, idCustodia: $idCustodia)';
+    return 'ModelCustodia(idUsuario: $idUsuario, idAgente: $idAgente, infoAceptado: $infoAceptado, fechaCreado: $fechaCreado, lugarSalida: $lugarSalida, lugarDestino: $lugarDestino, motivo: $motivo, idCustodia: $idCustodia, history: $history, estado: $estado, fechaSalida: $fechaSalida)';
   }
 
   @override
@@ -97,7 +126,10 @@ class ModelCustodia {
         other.lugarSalida == lugarSalida &&
         other.lugarDestino == lugarDestino &&
         other.motivo == motivo &&
-        other.idCustodia == idCustodia;
+        other.idCustodia == idCustodia &&
+        listEquals(other.history, history) &&
+        other.estado == estado &&
+        other.fechaSalida == fechaSalida;
   }
 
   @override
@@ -109,7 +141,10 @@ class ModelCustodia {
         lugarSalida.hashCode ^
         lugarDestino.hashCode ^
         motivo.hashCode ^
-        idCustodia.hashCode;
+        idCustodia.hashCode ^
+        history.hashCode ^
+        estado.hashCode ^
+        fechaSalida.hashCode;
   }
 }
 

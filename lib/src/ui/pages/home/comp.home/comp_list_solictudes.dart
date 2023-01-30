@@ -1,42 +1,69 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:policiacomunitaria/src/global/global_valiables_app.dart';
+import 'package:get/get.dart';
+import 'package:policiacomunitaria/src/global/actions/actions.dateformat.dart';
+import 'package:policiacomunitaria/src/logic/controllers/appCtrl.dart';
+import 'package:policiacomunitaria/src/models/models_custodia.dart';
+import 'package:policiacomunitaria/src/theme/theme.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_card.dart';
 import 'package:policiacomunitaria/src/ui/widgets/widget_text.dart';
 
 class CompListSolicitudes extends StatelessWidget {
-  const CompListSolicitudes({super.key});
-
+  CompListSolicitudes({super.key});
+  final AppController _appCtrl = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        text(
-          'Solicitudes de Custodia',
-          type: 'subtitle',
-          top: 20,
-          bottom: 15,
-        ),
-        listCustodias(),
-      ],
+    return Obx(
+      () => _appCtrl.listCustodias.isEmpty
+          ? const SizedBox()
+          : FadeIn(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Divider(
+                        height: 50,
+                        color: kprimaryColor,
+                        thickness: 0.8,
+                      ),
+                    ),
+                    text(
+                      'Solicitudes de Custodia',
+                      type: 'subtitle',
+                      // top: 20,
+                      bottom: 15,
+                    ),
+                    listCustodias(),
+                  ],
+                ),
+              ),
+            ),
     );
   }
 
   Widget listCustodias() {
-    return Column(
-      children: List.generate(
-        3,
-        (index) => cardCustodia(),
+    return Obx(
+      () => Column(
+        children: List.generate(
+          _appCtrl.listCustodias.length,
+          (index) => cardCustodia(
+            index,
+            _appCtrl.listCustodias[0],
+          ),
+        ),
       ),
     );
   }
 
-  Widget cardCustodia() {
+  Widget cardCustodia(int int, ModelCustodia custodia) {
     return CtCard(
       width: double.infinity,
       margin: const EdgeInsets.only(
-        bottom: 10,
+        bottom: 15,
       ),
       showShadow: true,
       child: Column(
@@ -48,11 +75,15 @@ class CompListSolicitudes extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               text(
-                'Solicitud # 1',
+                'Solicitud # ${int + 1}',
                 type: 'subtitle',
               ),
               text(
-                '12/11/2023 10H40',
+                formatDate(
+                  time: DateTime.fromMillisecondsSinceEpoch(
+                    custodia.fechaCreado!,
+                  ),
+                ),
                 size: 13,
               ),
             ],
@@ -60,15 +91,15 @@ class CompListSolicitudes extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          info(),
-          info(),
-          statusCard(),
+          info(custodia.lugarSalida!),
+          info(custodia.lugarDestino!),
+          statusCard(custodia.estado),
         ],
       ),
     );
   }
 
-  Widget info() {
+  Widget info(String data) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5.0),
       child: Row(
@@ -79,7 +110,7 @@ class CompListSolicitudes extends StatelessWidget {
             size: 15,
           ),
           text(
-            'Solicitud # 1',
+            data,
             size: 13,
             left: 6,
           ),
@@ -88,8 +119,8 @@ class CompListSolicitudes extends StatelessWidget {
     );
   }
 
-  Widget statusCard() {
-    final typestatus = statusColors('EN_ESPERA');
+  Widget statusCard(String textStatus) {
+    final typestatus = statusColors(textStatus);
 
     return Container(
       margin: const EdgeInsets.only(top: 8),

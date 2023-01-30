@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:policiacomunitaria/src/global/actions/actions.toast.dart';
 import 'package:policiacomunitaria/src/global/global.page_navigator.dart';
+import 'package:policiacomunitaria/src/logic/repositories/custodia_repository.dart';
 import 'package:policiacomunitaria/src/logic/repositories/user_repository.dart';
 import 'package:policiacomunitaria/src/models/models.user.dart';
 import 'package:policiacomunitaria/src/models/models_custodia.dart';
@@ -26,24 +27,28 @@ class AppController extends GetxController {
   set modeAlert(value) => _modeAlert.value = value;
 
   @override
-  void onInit() {
-    setUser();
+  void onInit() async {
+    await setUser();
     ever(_userData, (callback) async => await setStUser());
     super.onInit();
   }
 
+  @override
+  void onReady() async {
+    await getCustodias();
+    super.onReady();
+  }
+
   // Methods
-  setUser() {
+  setUser() async {
     userData?.idUser = 'init_user';
-    Future.delayed(const Duration(seconds: 1), () async {
-      final respUser = await userRp.checkUserDataStorage();
-      userData = respUser;
-      if (respUser?.idUser != null) {
-        toPage(page: HomePage());
-        showToast('Bienvenido!! ${respUser?.name?.toUpperCase()}',
-            type: 'success');
-      }
-    });
+    final respUser = await userRp.checkUserDataStorage();
+    userData = respUser;
+    if (respUser?.idUser != null) {
+      toPage(page: HomePage());
+      showToast('Bienvenido!! ${respUser?.name?.toUpperCase()}',
+          type: 'success');
+    }
   }
 
   setStUser() async {
@@ -61,5 +66,15 @@ class AppController extends GetxController {
 
   changeStatusEmergency(bool status) async {
     modeAlert = status;
+  }
+
+  getCustodias() async {
+    Future.delayed(const Duration(seconds: 2), () async {
+      showToast('Buscando solicitudes de Custodia', type: 'load');
+      final listSet =
+          await CustodiaRepository().getCustodias(userData!.idUser!) ?? [];
+      listCustodias = listSet;
+      dismiseToast();
+    });
   }
 }
